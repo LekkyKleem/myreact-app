@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./styles.css";
 
 type Todo = {
   id: number;
@@ -24,17 +25,15 @@ const TodoList: React.FC<TodoListProps> = ({ todos, toggleTodo }) => {
     <div>
       <h2>Список дел</h2>
 
-      {/* Фильтры */}
-      <div style={{ marginBottom: "10px" , display: "flex", gap: "10px" }}>
+      <div id="todo-filter-buttons">
         <button onClick={() => setFilter("all")}>Все</button>
         <button onClick={() => setFilter("completed")}>Выполненные</button>
         <button onClick={() => setFilter("incomplete")}>Невыполненные</button>
       </div>
 
-      {/* Список задач */}
-      <ul style={{ listStyle: "none", paddingLeft: 0 }}>
+      <ul className="todo-list">
         {filteredTodos.map((todo) => (
-          <li key={todo.id} style={{ textDecoration: todo.completed ? "line-through" : "none" }}>
+          <li key={todo.id} className={todo.completed ? "completed" : ""}>
             <input type="checkbox" checked={todo.completed} onChange={() => toggleTodo(todo.id)} />
             {todo.title}
           </li>
